@@ -20,8 +20,12 @@
     $pass = trim($_POST['pass']);
     $desc = trim(htmlspecialchars($_POST['desc']));
     if(validate($user_name) && validate_blog($blog_name) && strlen($pass) > 3){
-      add_blog($user_name, $blog_name, md5($pass), $desc);
-      $subh = "Dodano blog " .$blog_name;
+      if(add_blog($user_name, $blog_name, md5($pass), $desc)){
+        $subh = "Dodano blog " .$blog_name;
+      }
+      else{
+        $subh = "Wystąpił błąd podczas tworzenia bloga<br>Przepraszamy";
+      }
     }
     else{
       $subh = "Wprowadź poprawne dane";

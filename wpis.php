@@ -18,7 +18,7 @@
   if(isset($_POST['sent'])){
     $users_blog_names = explode(PHP_EOL, file_get_contents('users'));
     foreach ($users_blog_names as $users_blog_name) {
-      $arr = explode('/', $users_blog_name);
+      $arr = explode(';', $users_blog_name);
       if($arr[0] != "") $assoc[$arr[0]] = $arr[1];
     }
     $user_name = trim(htmlspecialchars($_POST['user_name']));

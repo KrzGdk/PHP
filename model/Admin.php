@@ -8,7 +8,7 @@ function clear_all(){
   foreach ($files as $file) { 
     (is_dir("$dir/$file")) ? delete_folder("$dir/$file") : unlink("$dir/$file"); 
   }
-  file_put_contents("../users", "");
+  file_put_contents('../users', '');
 }
 
 function delete_folder($dir){

@@ -14,7 +14,7 @@
 
   $users_blog_names = explode(PHP_EOL, file_get_contents('users'));
   foreach ($users_blog_names as $user_blog_name) {
-    $arr = explode('/', $user_blog_name);
+    $arr = explode(';', $user_blog_name);
     if($arr[0] != "") $blogs[$arr[0]] = $arr[1];
   }
   if(!isset($_GET['nazwa'])){
