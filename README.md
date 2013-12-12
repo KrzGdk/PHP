@@ -1,4 +1,4 @@
 PHP
 ===
 
-PHP project
+PHP JiTW project - blog service
