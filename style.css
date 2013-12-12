@@ -101,7 +101,71 @@ em{
 }
 #blogs{
   margin: 0 auto;
-  width: 70%;
+  color:white;
+  width: 60%;
+  background-color: #3d3d3d;
+  border: 2px solid white;
+  border-top: 0;
+  box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+  -moz-box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+  -webkit-box-shadow: 1px 2px 6px rgba(0,0,0, 0.5);
+}
+#blogs h1{
+  margin-top: 0;
+  font-size: 28px;
+  padding: 10px;
+  padding-bottom: 0;
+  letter-spacing: 2px;
+}
+#blogs em{
+  margin-top: 0;
+  font-size: 18px;
+  padding: 10px;
+  padding-bottom: 0;
+}
+#blogs ul{
+  display: block;
+  padding: 0;
+  border-top: 2px solid white;
+}
+#blogs li{
+  padding-left: 5px;
+  background: url('img/listback.png');
+  display: block;
+  height: 50px;
+  border-bottom: 2px solid white;
+  line-height: 50px;
+}
+article > header{
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  height: 20px;
+}
+article > header p{
+  line-height: 17px;
+  padding-top: 0px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+article > p{
+  margin-left: 3px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+article > ul{
+    margin: 0;
+}
+article > ul > li{
+  list-style-type: square;
+  margin: 0;
+  padding: 0;
+}
+.addcomm{
+  font-size: 14px;
+  color: white;
+  display: inline-block;
+  margin-right: 10px;
 }
 @media screen and (max-width: 800px) {
   #menu{
