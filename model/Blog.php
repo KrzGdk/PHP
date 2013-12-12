@@ -55,7 +55,6 @@ function add_comment($blog, $id, $nick, $type, $cont){
     $files = array_diff(scandir($folder_path), array('.','..')); 
     $comm_id = count($files);
   }
-  echo "dodaje ".$folder_path;
   $data = $type.PHP_EOL.date('Y-m-d, H:i:s').PHP_EOL.$nick.PHP_EOL.$cont;
   if(file_put_contents($folder_path.DS.$comm_id, $data)) return true;
   else return false;

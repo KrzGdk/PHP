@@ -58,6 +58,7 @@ header{
   margin-left: 0 auto;
   margin-right: 0 auto;
   text-align: center;
+  text-shadow: 0px 1px #FFFFFF;
 }
 #main{
   background-color: #3d3d3d;
@@ -130,13 +131,17 @@ em{
 }
 #blogs li{
   padding-left: 5px;
-  background: url('img/listback.png');
+  background: #A7A7A7;
   display: block;
   height: 50px;
   border-bottom: 2px solid white;
   line-height: 50px;
 }
 article > header{
+  background-color: white;
+  color: black;
+  border: 0;
+  outline: 0;
   margin: 0;
   padding: 0;
   text-align: right;
@@ -153,20 +158,69 @@ article > p{
   margin-top: 2px;
   margin-bottom: 2px;
 }
-article > ul{
-    margin: 0;
+ul#attach{
+  margin: 0;
+  display: inline;
+  border: 0;
 }
-article > ul > li{
+ul#attach > li{
+  font-size: 18px;
+  background: none;
+  border: 0;
+  display: inline;
+  height: 30px;
   list-style-type: square;
   margin: 0;
-  padding: 0;
+  padding-left: 9px;
+  line-height: 30px;
+}
+ul#attach > li > a{
+  color: #EFEFEF;
+}
+ul#attach > li > a:hover{
+  color: white;
+}
+#attachp{
+  font-size: 20px;
+}
+article > section > h1{
+  margin-bottom: 2px;
+}
+.comments header{
+  background-color: #B3B3B3;
+}
+.comments header p{
+  line-height: 10px;
+  font-size: 18px;
+}
+.comment{
+  margin-top: 2px;
 }
 .addcomm{
-  font-size: 14px;
+  font-size: 16px;
   color: white;
   display: inline-block;
   margin-right: 10px;
 }
+.addcomm:hover{
+  color: #B00000;
+}
+
+.alignleft {
+  float: left;
+  width: 32%;
+  text-align:left;
+}
+.aligncenter {
+  float: left;
+  width: 33%;
+  text-align:center;
+}
+.alignright {
+  width: 33%;
+ float: left;
+ text-align:right;
+}​
 @media screen and (max-width: 800px) {
   #menu{
     visibility: hidden;

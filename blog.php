@@ -72,18 +72,46 @@
 
             </p>
             <?php if($lines[$j]){
-              echo '<p>Załączniki:</p><ul>';
+              echo '<p id="attachp">Załączniki:</p><ul id="attach">';
                 for ($i=$j; $i < $j+3; $i++) { 
                   if($lines[$i])
                     echo '<li><a href='.$lines[$i].'>Załącznik 1. (.'.pathinfo($lines[$i], PATHINFO_EXTENSION).')</a><br>';
                 }
-              } 
-            echo '</ul><div style="text-align: right;">';
-
-          echo "<a href='koment.php?blog=$name&amp;id=$file' class='addcomm'>Dodaj komentarz($comm_count)</a>";
-
-        echo '</div></article>';
-
+              } ?>
+          </ul>
+          <section class="comments">
+            <?php
+            if($comm_count == 0){
+              echo "<h1 style='display:inline-block;'>Brak komentarzy</h1>";
+              echo "<a href='koment.php?blog=$name&amp;id=$file' class='addcomm'>Bądź pierwszy</a>";
+            }
+            else{
+              echo "<h1 style='display:inline-block;'>Komentarze ($comm_count)</h1>&nbsp;";
+              echo "<a href='koment.php?blog=$name&amp;id=$file' class='addcomm'>Dodaj komentarz</a>";
+              
+              $comm_dir = 'data'.DS.$name.DS.$file.'.k';
+              $comm_files = array_diff(scandir($comm_dir), array('.','..')); 
+              foreach ($comm_files as $comm_file) {
+                $comm_lines = file($comm_dir.DS.$comm_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+              
+              ?>
+            <article>
+              <header>
+                <p class="alignleft">Autor: <?php echo $comm_lines[2]; ?></p>
+                <p class="aligncenter"><?php echo $comm_lines[0]; ?></p>
+                <p class="alignright"><?php echo $comm_lines[1]; ?></p>
+              </header>
+              <div style="clear: both;"></div>
+              <p class="comment">
+              <?php $k = 3; while($comm_lines[$k]) echo $comm_lines[$k++].'<br>'; ?>
+              </p>
+            </article>
+          <?php } 
+              }
+          ?>
+        </section>
+      </article>
+      <?php
       }
 
     }
