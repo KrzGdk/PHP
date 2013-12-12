@@ -84,7 +84,7 @@
       <input type="text" name="user_name"><br>
     </div>  
     <div class="field">
-      <div class="label">Hasło</div>
+      <div class="label">Hasło:</div>
       <input type="password" name="pass"><br>
     </div> 
     <div class="field">
