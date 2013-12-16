@@ -41,7 +41,7 @@
         # OBSŁUGA PLIKÓW
         $uploaded = array();
         foreach ($_FILES as $form_name => $file_data) {
-          if($file_data['error'] === 0){
+          if($file_data['error'] === 0 && strpos($file_data['type'], 'application')){
             $save_path = $blog_path.DS.$blog_file_name.substr($form_name, -1).'.'.pathinfo($file_data['name'], PATHINFO_EXTENSION);
             if(move_uploaded_file($file_data['tmp_name'],$save_path)){
               $uploaded[substr($form_name, -1)] = $save_path;
@@ -57,7 +57,7 @@
         foreach ($uploaded as $up_index => $up_path) {
           $entry .= PHP_EOL.$up_path;
         }
-        file_put_contents($blog_path.DS.$blog_file_name, $entry);
+        file_put_contents($blog_path.DS.$blog_file_name, $entry, LOCK_EX);
         $subh = "Dodawanie wpisu przebiegło pomyślnie";
       }
       else{

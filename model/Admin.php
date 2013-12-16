@@ -18,5 +18,3 @@ function delete_folder($dir){
   } 
   return rmdir($dir); 
 }
-
-clear_all();

@@ -47,6 +47,7 @@
     </article>
   <?php
   }
+  $files = array_reverse($files);
   foreach ($files as $file) {
     if(preg_match('/^[0-9]{16}$/', $file)){
       if(!file_exists('data'.DS.$name.DS.$file.'.k')){
@@ -75,18 +76,18 @@
               echo '<p id="attachp">Załączniki:</p><ul id="attach">';
                 for ($i=$j; $i < $j+3; $i++) { 
                   if($lines[$i])
-                    echo '<li><a href='.$lines[$i].'>Załącznik 1. (.'.pathinfo($lines[$i], PATHINFO_EXTENSION).')</a><br>';
+                    echo '<li><a href='.str_replace(" ", "%20", $lines[$i]).'>Załącznik 1. (.'.pathinfo($lines[$i], PATHINFO_EXTENSION).')</a><br>';
                 }
               } ?>
           </ul>
           <section class="comments">
             <?php
             if($comm_count == 0){
-              echo "<h1 style='display:inline-block;'>Brak komentarzy</h1>";
+              echo "<h3>Brak komentarzy</h3>&nbsp;&nbsp;";
               echo "<a href='koment.php?blog=$name&amp;id=$file' class='addcomm'>Bądź pierwszy</a>";
             }
             else{
-              echo "<h1 style='display:inline-block;'>Komentarze ($comm_count)</h1>&nbsp;";
+              echo "<h3>Komentarze ($comm_count)</h3>&nbsp;&nbsp;";
               echo "<a href='koment.php?blog=$name&amp;id=$file' class='addcomm'>Dodaj komentarz</a>";
               
               $comm_dir = 'data'.DS.$name.DS.$file.'.k';

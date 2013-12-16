@@ -12,18 +12,24 @@ function add_blog($user,$blog,$pass,$desc){
 
   $path = "data".DS.$blog;
   if(!file_exists($path)){
-    if(mkdir($path) && touch($path.DS.'info')){
+    if(mkdir($path) && file_put_contents($path.DS.'info', '', LOCK_EX)){
       $output = implode(PHP_EOL, array($user,$pass,$desc));
-      file_put_contents($path.DS.'info', $output);
+      file_put_contents($path.DS.'info', $output, LOCK_EX);
       if(!file_exists('users')){
-        if(!touch('users')){
+        if(!file_put_contents('users', '', LOCK_EX)){
           return false;
         }
       }
       if($fu = fopen("users", "a")){
-        fwrite($fu, $user. ';' .$blog.PHP_EOL);
-        fclose($fu);
-        return true;
+        if(flock($fu, LOCK_EX)){
+          fwrite($fu, $user. ';' .$blog.PHP_EOL);
+          flock($fu, LOCK_UN);
+          fclose($fu);
+          return true;
+        }
+        else{
+          return false;
+        }
       }
       else{
         return false;
@@ -56,7 +62,7 @@ function add_comment($blog, $id, $nick, $type, $cont){
     $comm_id = count($files);
   }
   $data = $type.PHP_EOL.date('Y-m-d, H:i:s').PHP_EOL.$nick.PHP_EOL.$cont;
-  if(file_put_contents($folder_path.DS.$comm_id, $data)) return true;
+  if(file_put_contents($folder_path.DS.$comm_id, $data, LOCK_EX)) return true;
   else return false;
 }
 
