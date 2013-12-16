@@ -1,5 +1,5 @@
 <header>
-  <img src="img/logo.png" id="logo" alt="Logo">
+  <a href="index.php"><img src="img/logo.png" id="logo" alt="Logo"></a>
   <div id="menu">
     <ul id="menuitems">
       <li><a href="index.php">Załóż blog</a>
