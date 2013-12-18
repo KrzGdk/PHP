@@ -1,5 +1,7 @@
 <?php
 # Funkcje umożliwiające dodawanie blogów i komentarzy
+error_reporting(-1);
+ini_set('display_errors', 'On');
 
 define('DS', DIRECTORY_SEPARATOR);
 
@@ -17,7 +19,7 @@ function add_blog($user,$blog,$pass,$desc){
   }
   if(!file_exists($path)){
     if(!array_key_exists($user, $user_blog_arr)){
-      if(mkdir($path) && file_put_contents($path.DS.'info', '', LOCK_EX)){
+      if(mkdir($path) && touch($path.DS.'info') && chmod($path.DS.'info',0777)){
         $output = implode(PHP_EOL, array($user,$pass,$desc));
         file_put_contents($path.DS.'info', $output, LOCK_EX);
         if(!file_exists('users')){

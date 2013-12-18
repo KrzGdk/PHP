@@ -1,0 +1,93 @@
+const int N = 10000;
+	int tab[N];
+	int l, ile_liczb;
+	for (int i = 0; i < N; i++){
+		cin >> l;
+		if (l == 0){
+			ile_liczb = i;
+			break;
+		}
+		else {
+			tab[i] = l;
+		}
+	}
+	if (ile_liczb < 3){
+		cout << "Za malo liczb";
+		return 0;
+	}
+
+	int min, ile_min=0;
+	min = tab[0];
+	for (int i = 1; i < ile_liczb; i++){
+		if (tab[i] < min){
+			min = tab[i];
+		}
+	}
+	for (int i = 0; i < ile_liczb; i++){
+		if (tab[i] == min){
+			ile_min++;
+		}
+	}
+	cout << ile_min << endl;;
+
+	int ile_parz=0;
+	for (int i = 0; i < ile_liczb; i++){
+		if (tab[i] % 2 == 0){
+			ile_parz++;
+		}
+	}
+	cout << ile_parz<<endl;
+
+	int druga;
+	for (int i = 0; i < ile_liczb; i++){
+		if (tab[i] != min){
+			druga = tab[i];
+			break;
+		}
+	}
+	for (int i = 0; i < ile_liczb; i++){
+		if (tab[i] < druga && tab[i] != min){
+			druga = tab[i];
+		}
+	}
+	cout << druga<<endl;
+
+	bool rosn;
+	for (int i = 0; i < ile_liczb-1; i++){
+		if (tab[i] < tab[i + 1]) rosn = true;
+		else rosn = false;
+		if (rosn == false) break;
+	}
+	cout << "rosnacy: " << rosn<<endl;
+
+	bool mal;
+	for (int i = 0; i < ile_liczb - 1; i++){
+		if (tab[i] > tab[i + 1]) mal = true;
+		else mal = false;
+		if (mal == false) break;
+	}
+	cout << "malejacy: " << mal << endl;
+
+	bool arytm;
+	int krok = tab[1] - tab[0];
+	for (int i = 0; i < ile_liczb - 1; i++){
+		if (tab[i]+krok == tab[i + 1]) arytm = true;
+		else arytm = false;
+		if (arytm == false) break;
+	}
+	cout << "arytm: " << arytm << endl;
+
+	bool geom;
+	int q = tab[1]/tab[0];
+	for (int i = 0; i < ile_liczb - 1; i++){
+		if (tab[i]*q == tab[i + 1]) geom = true;
+		else geom = false;
+		if (geom == false) break;
+	}
+	cout << "geom: " << geom << endl;
+
+	int suma3 = tab[ile_liczb - 1] + tab[ile_liczb - 2] + tab[ile_liczb - 3];
+	cout << suma3;
+
+	cin.get(); cin.get();
+	return 0;

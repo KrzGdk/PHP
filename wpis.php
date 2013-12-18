@@ -41,9 +41,9 @@
         # OBSŁUGA PLIKÓW
         $uploaded = array();
         foreach ($_FILES as $form_name => $file_data) {
-          if($file_data['error'] === 0 && strpos($file_data['type'], 'application')){
+          if($file_data['error'] === 0 && strpos($file_data['type'], 'application') === false){
             $save_path = $blog_path.DS.$blog_file_name.substr($form_name, -1).'.'.pathinfo($file_data['name'], PATHINFO_EXTENSION);
-            if(move_uploaded_file($file_data['tmp_name'],$save_path)){
+            if(move_uploaded_file($file_data['tmp_name'],$save_path) && chmod($save_path, 0644)){
               $uploaded[substr($form_name, -1)] = $save_path;
             }
             else{

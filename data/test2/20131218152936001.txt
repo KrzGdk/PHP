@@ -1,0 +1,15 @@
+const int max = 10;
+	int t[max];
+	int index = 0;
+	for (int i = 0;; i++){
+		if (i % 2 == 1){
+			t[index] = i*i;
+			index++;
+		}
+		if (index == max) break;
+	}
+	for (int i = 0; i < max; i++){
+		cout << t[i] << endl;
+	}
+	cin.get(); cin.get();
+	return 0;
