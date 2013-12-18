@@ -1,6 +1,6 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
+# Funkcje czyszczące cały system
+# aby usunąć wszystkie dane, wystarczy wywołać clear_all()
 
 function clear_all(){
   $dir = '../data';

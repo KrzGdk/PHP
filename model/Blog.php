@@ -1,6 +1,6 @@
 <?php
-error_reporting(-1);
-ini_set('display_errors', 'On');
+# Funkcje umożliwiające dodawanie blogów i komentarzy
+
 define('DS', DIRECTORY_SEPARATOR);
 
 function add_blog($user,$blog,$pass,$desc){
@@ -9,23 +9,32 @@ function add_blog($user,$blog,$pass,$desc){
       return false;
     }
   }
-
   $path = "data".DS.$blog;
+  $users_blog_names = explode(PHP_EOL, file_get_contents('users'));
+  foreach ($users_blog_names as $users_blog_name) {
+    $arr = explode(';', $users_blog_name);
+    if($arr[0] != "") $user_blog_arr[$arr[0]] = $arr[1];
+  }
   if(!file_exists($path)){
-    if(mkdir($path) && file_put_contents($path.DS.'info', '', LOCK_EX)){
-      $output = implode(PHP_EOL, array($user,$pass,$desc));
-      file_put_contents($path.DS.'info', $output, LOCK_EX);
-      if(!file_exists('users')){
-        if(!file_put_contents('users', '', LOCK_EX)){
-          return false;
+    if(!array_key_exists($user, $user_blog_arr)){
+      if(mkdir($path) && file_put_contents($path.DS.'info', '', LOCK_EX)){
+        $output = implode(PHP_EOL, array($user,$pass,$desc));
+        file_put_contents($path.DS.'info', $output, LOCK_EX);
+        if(!file_exists('users')){
+          if(!file_put_contents('users', '', LOCK_EX)){
+            return false;
+          }
         }
-      }
-      if($fu = fopen("users", "a")){
-        if(flock($fu, LOCK_EX)){
-          fwrite($fu, $user. ';' .$blog.PHP_EOL);
-          flock($fu, LOCK_UN);
-          fclose($fu);
-          return true;
+        if($fu = fopen("users", "a")){
+          if(flock($fu, LOCK_EX)){
+            fwrite($fu, $user. ';' .$blog.PHP_EOL);
+            flock($fu, LOCK_UN);
+            fclose($fu);
+            return true;
+          }
+          else{
+            return false;
+          }
         }
         else{
           return false;
@@ -36,6 +45,7 @@ function add_blog($user,$blog,$pass,$desc){
       }
     }
     else{
+      echo 'Taki użytkownik już istnieje';
       return false;
     }
   }
